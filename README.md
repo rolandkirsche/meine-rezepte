@@ -1,12 +1,20 @@
-# Meine Rezepte – Web-App
+# Meine Rezepte
 
-Offline-first Progressive Web App. Medication entries are stored locally in the browser on each device.
+Web-App für den Home-Bildschirm des iPad (ausgelegt für iPad mini 4 mit iPadOS 15). Sie zeigt, wie lange der Medikamentenvorrat reicht und wann ein neues Rezept fällig ist.
 
-## Publish with GitHub Pages
+- Der Vorrat zählt jeden Tag von selbst herunter.
+- Ablauf je Medikament: anfordern → angefordert → erhalten → eingelöst (Bestand steigt um die Packungsgröße).
+- Alle Einträge bleiben im lokalen Speicher des Geräts. Es gibt keinen Server und keine Synchronisation.
+- Nach dem ersten Öffnen läuft die App ohne Internet.
+- Hinweise erscheinen beim Öffnen der App, nicht als Hintergrundmitteilung.
 
-1. Create a **public** GitHub repository and upload the contents of this folder to its `main` branch.
-2. In repository Settings → Pages, set Source to **GitHub Actions**.
-3. Wait for the Pages workflow to finish. The workflow URL is printed in its deployment summary.
-4. Open the HTTPS URL on iPad in Safari, then Share → Add to Home Screen. Open it once while online so offline files are cached.
+## Veröffentlichung
 
-No medication entries are sent to GitHub; only these app files are published.
+Ein Push auf `main` veröffentlicht die Dateien über GitHub Pages (`.github/workflows/pages.yml`). Der Pages-Source muss auf **GitHub Actions** stehen.
+
+## Installation auf dem iPad
+
+1. Die HTTPS-Adresse in Safari öffnen.
+2. Teilen → Zum Home-Bildschirm.
+3. Die App vom Home-Bildschirm einmal mit Internet starten, bis unten „Offline bereit“ steht.
+4. Erst dort Medikamente eintragen, denn Safari und die Home-Bildschirm-App speichern getrennt.

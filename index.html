@@ -1,21 +1,352 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f5f6fa"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Meine Rezepte"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon.svg"><title>Meine Rezepte</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121815" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Rezepte">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>Meine Rezepte</title>
 <style>
-:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#202332;background:#f5f6fa;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-height:100vh}.wrap{max-width:980px;margin:auto;padding:env(safe-area-inset-top) 22px 40px}.top{display:flex;align-items:center;justify-content:space-between;padding:32px 0 22px}.brand{display:flex;align-items:center;gap:13px}.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(145deg,#5588ff,#3865d9);display:grid;place-items:center;color:white;font-size:24px;box-shadow:0 7px 18px #496fd433}h1{font-size:28px;margin:0;letter-spacing:-.5px}.sub{color:#787d8c;margin-top:4px}.add{border:0;border-radius:14px;background:#386ce5;color:white;font-size:16px;font-weight:650;padding:14px 18px;cursor:pointer;box-shadow:0 5px 14px #386ce533}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}.stat,.card,.empty{background:#fff;border:1px solid #ebedf3;border-radius:20px;padding:20px;box-shadow:0 5px 20px #1d264008}.stat small{display:block;color:#7c8190;font-size:13px;margin-bottom:9px}.stat strong{font-size:26px}.section-title{font-size:16px;margin:24px 0 12px;color:#666b79;font-weight:650}.meds{display:grid;gap:12px}.card{display:flex;gap:16px;align-items:center;padding:18px 20px}.pill{width:46px;height:46px;flex:none;border-radius:15px;background:#eef3ff;color:#4172df;display:grid;place-items:center;font-size:22px}.card.warn .pill{background:#fff4e6;color:#dd871e}.info{min-width:0;flex:1}.name{font-size:17px;font-weight:700}.detail,.status{font-size:13px;color:#777d8b;margin-top:5px}.days{text-align:right;min-width:82px}.days strong{font-size:25px}.days small{display:block;font-size:12px;color:#777d8b}.actions{display:flex;gap:8px;margin-left:4px}.iconbtn{border:1px solid #e7e9ef;background:white;color:#606676;border-radius:11px;padding:9px 10px;cursor:pointer;font-size:14px}.empty{text-align:center;color:#7b8090;padding:42px 20px}.empty b{display:block;color:#343949;font-size:18px;margin-bottom:7px}dialog{border:0;padding:0;border-radius:22px;width:min(520px,calc(100% - 28px));box-shadow:0 25px 100px #10172a44}dialog::backdrop{background:#141a2b77;backdrop-filter:blur(3px)}form{padding:24px}.form-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.form-head h2{margin:0;font-size:22px}.close{border:0;background:#f0f1f5;border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer}label{display:block;font-weight:600;font-size:14px;margin:14px 0 6px}input,select{width:100%;padding:13px 14px;border:1px solid #dfe2e9;border-radius:12px;font:inherit;background:white}input:focus,select:focus{outline:2px solid #83a5ff;border-color:#4f7be7}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:23px}.secondary,.save{border:0;border-radius:12px;padding:12px 17px;font:inherit;font-weight:650;cursor:pointer}.secondary{background:#f0f1f5}.save{background:#386ce5;color:white}.hint{color:#858a98;font-size:12px;margin-top:10px}@media(max-width:620px){.wrap{padding-left:15px;padding-right:15px}.top{padding-top:23px}.stats{gap:8px}.stat{padding:14px}.stat strong{font-size:21px}.card{gap:11px;padding:15px 12px}.pill{width:40px;height:40px}.days{min-width:60px}.actions{flex-direction:column}.iconbtn{padding:7px}}
+:root{
+  --bg:#f4f1ea;--surface:#fffdf8;--sunk:#ebe7dc;--ink:#1d2b26;--muted:#65716b;--line:#e2ddd0;
+  --brand:#1f5c4a;--on-brand:#fff;--warn:#a94f1b;--warn-soft:#f9e9db;--ok:#2f7d63;--ok-soft:#e1efe8;
+  --danger:#a8322a;--danger-soft:#f8e2df;--hero:#1f5c4a;--hero-due:#9a4718;
+  --serif:ui-serif,"New York",Georgia,serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#121815;--surface:#1b2420;--sunk:#27322d;--ink:#eef1ea;--muted:#9eaba3;--line:#2d3933;
+  --brand:#74c5a7;--on-brand:#0e1f19;--warn:#ec9c66;--warn-soft:#3a281b;--ok:#74c5a7;--ok-soft:#1f3229;
+  --danger:#f0877c;--danger-soft:#3c1f1c;--hero:#1c4a3c;--hero-due:#7c3d17;
+  color-scheme:dark;
+}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font:17px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;touch-action:manipulation}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.wrap{max-width:1000px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 28px) calc(env(safe-area-inset-right) + 28px) calc(env(safe-area-inset-bottom) + 28px) calc(env(safe-area-inset-left) + 28px)}
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:20px}
+.date{color:var(--muted);font-size:15px}
+h1{font:600 36px/1.1 var(--serif);letter-spacing:-.4px;margin:2px 0 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:46px;padding:10px 18px;border:0;border-radius:14px;font-weight:600;background:var(--sunk);color:var(--ink);white-space:nowrap}
+.btn.primary{background:var(--brand);color:var(--on-brand)}
+.btn.warn{background:var(--warn);color:#fff}
+.btn.ghost{background:transparent;color:var(--muted);padding-inline:12px}
+.btn.danger{background:transparent;color:var(--danger);padding-inline:6px}
+.btn.danger.armed{background:var(--danger);color:#fff;padding-inline:18px}
+@media (prefers-color-scheme:dark){.btn.warn{color:#26150a}.btn.danger.armed{color:#2a100d}}
+.hero{background:var(--hero);color:#fff;border-radius:24px;padding:26px 28px;margin-bottom:12px}
+.hero.due{background:var(--hero-due)}
+.hero h2{font:600 30px/1.15 var(--serif);margin:0 0 6px}
+.hero p{margin:0;opacity:.9;font-size:17px}
+.notice{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 18px;font-size:15px;color:var(--muted);margin-top:12px}
+.notice b{color:var(--ink)}
+.group{font-size:14px;font-weight:600;color:var(--muted);margin:26px 2px 10px}
+.meds{display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:900px){.meds{grid-template-columns:1fr 1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px 20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.title{min-width:0}
+.name{font:600 21px/1.2 var(--serif);overflow-wrap:anywhere}
+.sub{color:var(--muted);font-size:15px;margin-top:2px;overflow-wrap:anywhere}
+.days{flex:none;text-align:right;line-height:1}
+.days b{font:600 34px/1 var(--serif);font-variant-numeric:lining-nums}
+.days small{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+.card.low .days b{color:var(--warn)}
+.card.empty .days b{color:var(--danger)}
+.bar{position:relative;height:8px;border-radius:4px;background:var(--sunk)}
+.fill{position:absolute;inset:0 auto 0 0;border-radius:4px;background:var(--ok)}
+.card.low .fill{background:var(--warn)}
+.card.empty .fill{background:var(--danger)}
+.tick{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--muted);border-radius:1px}
+.foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px}
+.state{font-size:15px;color:var(--muted);min-width:0;flex:1 1 200px}
+.state b{font-weight:600;color:var(--ok)}
+.card.low .state b{color:var(--warn)}
+.card.empty .state b{color:var(--danger)}
+.acts{display:flex;gap:4px;align-items:center;margin-left:auto}
+.blank{background:var(--surface);border:1px dashed var(--line);border-radius:20px;padding:44px 24px;text-align:center;color:var(--muted);margin-top:12px}
+.blank b{display:block;font:600 22px/1.2 var(--serif);color:var(--ink);margin-bottom:6px}
+.blank .btn{margin-top:18px}
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-top:28px;color:var(--muted);font-size:14px}
+dialog{border:0;padding:0;background:var(--surface);color:var(--ink);border-radius:24px;width:min(540px,calc(100vw - 32px));max-height:calc(100vh - 48px);overflow:auto;-webkit-overflow-scrolling:touch;margin:24px auto auto;box-shadow:0 24px 80px rgba(10,20,15,.35)}
+dialog::backdrop{background:rgba(10,20,15,.45)}
+.sheet{padding:24px}
+.sheet h2{font:600 25px/1.2 var(--serif);margin:0}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+label{display:block;font-size:14px;font-weight:600;color:var(--muted);margin:14px 0 6px}
+.field{width:100%;min-height:48px;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);font-size:17px;-webkit-appearance:none;appearance:none}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stepper{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:12px;background:var(--bg);overflow:hidden;min-height:48px}
+.stepper button{flex:none;width:46px;border:0;background:transparent;font-size:22px;color:var(--brand)}
+.stepper input{flex:1;width:100%;min-width:0;border:0;background:transparent;text-align:center;font-size:17px;font-weight:600;padding:0}
+.stepper input:focus-visible{outline:none}
+.error{color:var(--danger);font-size:15px;margin-top:12px;min-height:21px}
+.sheet-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px}
+.sheet-foot>div{display:flex;gap:8px;margin-left:auto}
+.note{color:var(--muted);font-size:15px;margin:0 0 14px}
+textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);padding:10px;font:13px/1.4 ui-monospace,Menlo,monospace}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 20px);transform:translateX(-50%);display:flex;align-items:center;gap:6px;max-width:calc(100vw - 32px);background:#1d2b26;color:#fff;border-radius:16px;padding:6px 6px 6px 18px;box-shadow:0 12px 40px rgba(10,20,15,.35);font-size:15px}
+.toast button{border:0;background:transparent;color:#9fe0c6;font-weight:600;min-height:42px;padding:0 12px}
+[hidden]{display:none!important}
+@media (max-width:560px){.wrap{padding-left:16px;padding-right:16px}h1{font-size:30px}.hero{padding:20px}.hero h2{font-size:25px}}
 </style>
 </head>
-<body><main class="wrap">
-<header class="top"><div class="brand"><div class="logo">✚</div><div><h1>Meine Rezepte</h1><div class="sub">Medikamentenvorrat einfach im Blick</div></div></div><button class="add" id="add">＋ <span class="add-label">Hinzufügen</span></button></header>
-<section class="stats"><div class="stat"><small>Medikamente</small><strong id="count">0</strong></div><div class="stat"><small>Bald nachbestellen</small><strong id="urgent">0</strong></div><div class="stat"><small>Rezepte angefordert</small><strong id="requested">0</strong></div></section>
-<div id="content"></div>
+<body>
+<main class="wrap">
+  <header class="top">
+    <div><div class="date" id="date"></div><h1>Meine Rezepte</h1></div>
+    <button class="btn primary" id="add" aria-label="Medikament hinzufügen">+ Medikament</button>
+  </header>
+  <section class="hero" id="hero" aria-live="polite"><h2 id="heroTitle"></h2><p id="heroText"></p></section>
+  <div class="notice" id="install" hidden><b>Auf den Home-Bildschirm legen:</b> Teilen → Zum Home-Bildschirm. Trage deine Medikamente erst dort ein, denn Safari und die Home-Bildschirm-App speichern getrennt.</div>
+  <div id="content"></div>
+  <footer><span id="offline">Offline-Status wird geprüft …</span><button class="btn ghost" id="backup">Datensicherung</button></footer>
 </main>
-<dialog id="dlg"><form id="medform"><div class="form-head"><h2 id="formtitle">Medikament hinzufügen</h2><button type="button" class="close" id="close">×</button></div><input type="hidden" id="id"><label for="name">Medikament</label><input id="name" required maxlength="80" placeholder="z. B. Blutdruckmedikament"><label for="strength">Stärke (optional)</label><input id="strength" maxlength="50" placeholder="z. B. 10 mg"><div class="grid"><div><label for="quantity">Vorrat (Stück)</label><input id="quantity" type="number" min="0" step="1" value="30" required></div><div><label for="daily">Verbrauch pro Tag</label><input id="daily" type="number" min="0.01" step="0.25" value="1" required></div></div><div class="grid"><div><label for="warning">Warnen ab (Tage)</label><input id="warning" type="number" min="1" max="365" value="14" required></div><div><label for="status">Rezeptstatus</label><select id="status"><option>Noch anzufordern</option><option>Angefordert</option><option>Erhalten</option></select></div></div><div class="hint">Deine Einträge werden nur in diesem Browser gespeichert.</div><div class="form-actions"><button type="button" class="secondary" id="cancel">Abbrechen</button><button class="save" type="submit">Speichern</button></div></form></dialog>
+
+<dialog id="dlg" aria-labelledby="formTitle">
+  <form class="sheet" id="form" novalidate>
+    <div class="sheet-head"><h2 id="formTitle"></h2></div>
+    <label for="fName">Medikament</label>
+    <input class="field" id="fName" maxlength="80" autocomplete="off" placeholder="z. B. Ramipril">
+    <label for="fStrength">Stärke (optional)</label>
+    <input class="field" id="fStrength" maxlength="50" autocomplete="off" placeholder="z. B. 5 mg">
+    <div class="pair">
+      <div><label for="fQuantity">Vorrat heute (Stück)</label><div class="stepper" data-step="1" data-min="0"><button type="button" data-d="-1" aria-label="Weniger">−</button><input id="fQuantity" inputmode="decimal" autocomplete="off"><button type="button" data-d="1" aria-label="Mehr">+</button></div></div>
+      <div><label for="fDaily">Verbrauch pro Tag</label><div class="stepper" data-step="0.25" data-min="0.25"><button type="button" data-d="-1" aria-label="Weniger">−</button><input id="fDaily" inputmode="decimal" autocomplete="off"><button type="button" data-d="1" aria-label="Mehr">+</button></div></div>
+    </div>
+    <div class="pair">
+      <div><label for="fPack">Packungsgröße (Stück)</label><div class="stepper" data-step="1" data-min="1"><button type="button" data-d="-1" aria-label="Weniger">−</button><input id="fPack" inputmode="numeric" autocomplete="off"><button type="button" data-d="1" aria-label="Mehr">+</button></div></div>
+      <div><label for="fWarn">Erinnern ab (Tage Vorrat)</label><div class="stepper" data-step="1" data-min="0"><button type="button" data-d="-1" aria-label="Weniger">−</button><input id="fWarn" inputmode="numeric" autocomplete="off"><button type="button" data-d="1" aria-label="Mehr">+</button></div></div>
+    </div>
+    <label for="fStatus">Rezept</label>
+    <select class="field" id="fStatus"><option value="none">Kein Rezept unterwegs</option><option value="requested">Angefordert</option><option value="received">Erhalten, noch nicht eingelöst</option></select>
+    <div class="error" id="err" role="alert"></div>
+    <div class="sheet-foot">
+      <button type="button" class="btn danger" id="del" hidden>Löschen</button>
+      <div><button type="button" class="btn" id="cancel">Abbrechen</button><button type="submit" class="btn primary">Sichern</button></div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="bak" aria-labelledby="bakTitle">
+  <div class="sheet">
+    <div class="sheet-head"><h2 id="bakTitle">Datensicherung</h2></div>
+    <p class="note">Deine Einträge liegen nur auf diesem iPad. Löschst du die App vom Home-Bildschirm, sind sie weg. Lege deshalb ab und zu eine Sicherung in „Dateien“ ab.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn primary" id="bakExport">Sicherung erstellen</button>
+      <button class="btn" id="bakImport">Wiederherstellen</button>
+      <input type="file" id="bakFile" accept=".json,application/json" hidden>
+    </div>
+    <div id="bakTextWrap" hidden><label for="bakText">Sicherung (Text kopieren und aufbewahren)</label><textarea id="bakText" readonly></textarea></div>
+    <div class="error" id="bakErr" role="alert"></div>
+    <div class="sheet-foot"><div><button class="btn" id="bakClose">Schließen</button></div></div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" hidden><span id="toastText"></span><button id="toastUndo">Rückgängig</button></div>
+
 <script>
-const KEY='meine-rezepte.web.v1';let meds=[];try{meds=JSON.parse(localStorage.getItem(KEY)||'[]')}catch{}
-const $=id=>document.getElementById(id), dlg=$('dlg');function persist(){localStorage.setItem(KEY,JSON.stringify(meds));render()}function left(m){return Math.ceil((+m.quantity)/(+m.daily||1))}function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function render(){const urgent=meds.filter(m=>left(m)<=+m.warning&&m.status!=='Erhalten');$('count').textContent=meds.length;$('urgent').textContent=urgent.length;$('requested').textContent=meds.filter(m=>m.status==='Angefordert').length;const ordered=[...meds].sort((a,b)=>left(a)-left(b));if(!meds.length){$('content').innerHTML='<div class="empty"><b>Noch keine Medikamente</b>Füge dein erstes Medikament hinzu, um den Vorrat und anstehende Rezeptanfragen zu verfolgen.</div>';return}let soon=ordered.filter(m=>left(m)<=+m.warning&&m.status!=='Erhalten'),rest=ordered.filter(m=>!soon.includes(m));const row=m=>`<article class="card ${left(m)<=+m.warning&&m.status!=='Erhalten'?'warn':''}"><div class="pill">✚</div><div class="info"><div class="name">${esc(m.name)}</div><div class="detail">${m.strength?esc(m.strength)+' · ':''}${m.quantity} Stück · ${m.daily} täglich</div><div class="status">${esc(m.status)}${left(m)<=+m.warning&&m.status!=='Erhalten'?' · Bald nachbestellen':''}</div></div><div class="days"><strong>${left(m)}</strong><small>Tage Vorrat</small></div><div class="actions"><button class="iconbtn" data-edit="${m.id}">Bearbeiten</button><button class="iconbtn" data-addstock="${m.id}">＋ Packung</button></div></article>`;$('content').innerHTML=(soon.length?'<h2 class="section-title">Bald nachbestellen</h2><div class="meds">'+soon.map(row).join('')+'</div>':'')+(rest.length?'<h2 class="section-title">Deine Medikamente</h2><div class="meds">'+rest.map(row).join('')+'</div>':'');document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>edit(b.dataset.edit));document.querySelectorAll('[data-addstock]').forEach(b=>b.onclick=()=>{const m=meds.find(x=>x.id===b.dataset.addstock);m.quantity=+m.quantity+30;m.status='Erhalten';persist()})}
-function edit(id){const m=meds.find(x=>x.id===id);if(!m)return;$('formtitle').textContent='Medikament bearbeiten';$('id').value=m.id;$('name').value=m.name;$('strength').value=m.strength||'';$('quantity').value=m.quantity;$('daily').value=m.daily;$('warning').value=m.warning;$('status').value=m.status;dlg.showModal()}
-function openNew(){$('formtitle').textContent='Medikament hinzufügen';$('medform').reset();$('id').value='';$('quantity').value=30;$('daily').value=1;$('warning').value=14;dlg.showModal()}$('add').onclick=openNew;$('close').onclick=$('cancel').onclick=()=>dlg.close();dlg.onclick=e=>{if(e.target===dlg)dlg.close()};$('medform').onsubmit=e=>{e.preventDefault();const item={id:$('id').value||crypto.randomUUID(),name:$('name').value.trim(),strength:$('strength').value.trim(),quantity:+$('quantity').value,daily:+$('daily').value,warning:+$('warning').value,status:$('status').value};const i=meds.findIndex(m=>m.id===item.id);if(i<0)meds.push(item);else meds[i]=item;persist();dlg.close()};render();if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
-</script></body></html>
+'use strict';
+const KEY='meine-rezepte.v2';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num=n=>Number(n).toLocaleString('de-DE',{maximumFractionDigits:2});
+const round=n=>Math.round(n*100)/100;
+const parse=v=>{const s=String(v).trim().replace(',','.');return s===''?NaN:Number(s)};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,9);
+
+// Datum als ganze Kalendertage, damit Zeitumstellungen die Berechnung nicht verschieben.
+const dayOf=d=>Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5);
+const today=()=>dayOf(new Date());
+const fmtDay=(n,opts)=>new Date(n*864e5).toLocaleDateString('de-DE',Object.assign({timeZone:'UTC'},opts));
+const shortDay=n=>fmtDay(n,{weekday:'short',day:'numeric',month:'short'});
+const plural=(n,one,many)=>`${n} ${n===1?one:many}`;
+
+function clean(m){
+  const daily=+m.daily>0?+m.daily:1;
+  return {id:String(m.id||uid()),name:String(m.name||'Ohne Namen').slice(0,80),strength:String(m.strength||'').slice(0,50),
+    quantity:Math.max(0,+m.quantity||0),asOf:Number.isInteger(m.asOf)?m.asOf:today(),daily,
+    pack:+m.pack>=1?+m.pack:30,warn:+m.warn>=0?+m.warn:14,
+    status:['none','requested','received'].includes(m.status)?m.status:'none',statusDay:Number.isInteger(m.statusDay)?m.statusDay:null};
+}
+let meds=[];
+try{const raw=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(raw))meds=raw.map(clean)}catch(e){}
+
+function stock(m){return round(Math.max(0,m.quantity-m.daily*Math.max(0,today()-m.asOf)))}
+function daysLeft(m){return Math.floor(stock(m)/m.daily+1e-9)}
+function isLow(m){return daysLeft(m)<=m.warn}
+function isEmpty(m){return daysLeft(m)===0}
+function needsAction(m){return m.status==='none'&&isLow(m)}
+function rebase(m){m.quantity=stock(m);m.asOf=today()}
+
+function save(){
+  try{localStorage.setItem(KEY,JSON.stringify(meds))}
+  catch(e){toast('Speichern fehlgeschlagen. Bitte Speicherplatz prüfen.');}
+  render();
+}
+
+// Rückgängig: Stand vor der letzten Änderung wird kurz vorgehalten.
+let undoState=null,toastTimer=0;
+function snapshot(){undoState=JSON.stringify(meds)}
+function toast(text,canUndo){
+  $('toastText').textContent=text;$('toastUndo').hidden=!canUndo;$('toast').hidden=false;
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>{$('toast').hidden=true;undoState=null},7000);
+}
+$('toastUndo').onclick=()=>{if(undoState){meds=JSON.parse(undoState);undoState=null;save()}$('toast').hidden=true};
+
+function cardHtml(m){
+  const left=daysLeft(m),until=today()+left,low=isLow(m),empty=isEmpty(m);
+  const scale=Math.max(left,m.warn*2,Math.ceil(m.pack/m.daily),1);
+  const fill=Math.max(left>0?2:0,left/scale*100),tick=m.warn/scale*100;
+  let state,act;
+  if(m.status==='requested'){
+    state=`<b>Rezept angefordert</b>${m.statusDay!=null?' am '+esc(fmtDay(m.statusDay,{day:'numeric',month:'short'})):''}`;
+    act=`<button class="btn primary" data-act="received" data-id="${esc(m.id)}">Rezept erhalten</button>`;
+  }else if(m.status==='received'){
+    state='<b>Rezept erhalten</b>, noch einlösen';
+    act=`<button class="btn primary" data-act="refill" data-id="${esc(m.id)}">Eingelöst: +${esc(num(m.pack))} Stück</button>`;
+  }else if(low){
+    state=empty?'<b>Aufgebraucht.</b> Rezept anfordern':`<b>Rezept anfordern.</b> Reicht bis ${esc(shortDay(until))}`;
+    act=`<button class="btn warn" data-act="requested" data-id="${esc(m.id)}">Rezept angefordert</button>`;
+  }else{
+    state=`<b>Ausreichend.</b> Reicht bis ${esc(shortDay(until))}`;
+    act=`<button class="btn" data-act="refill" data-id="${esc(m.id)}">+${esc(num(m.pack))} Stück</button>`;
+  }
+  const sub=[m.strength?esc(m.strength):'',`${esc(num(stock(m)))} Stück`,`${esc(num(m.daily))} pro Tag`].filter(Boolean).join(' · ');
+  return `<article class="card${low?' low':''}${empty?' empty':''}">
+    <div class="head"><div class="title"><div class="name">${esc(m.name)}</div><div class="sub">${sub}</div></div>
+    <div class="days"><b>${left}</b><small>${left===1?'Tag':'Tage'} Vorrat</small></div></div>
+    <div class="bar"><div class="fill" style="width:${fill.toFixed(1)}%"></div><div class="tick" style="left:${tick.toFixed(1)}%"></div></div>
+    <div class="foot"><div class="state">${state}</div><div class="acts"><button class="btn ghost" data-act="edit" data-id="${esc(m.id)}">Bearbeiten</button>${act}</div></div>
+  </article>`;
+}
+function group(title,list){return list.length?`<h2 class="group">${title}</h2><div class="meds">${list.map(cardHtml).join('')}</div>`:''}
+
+function render(){
+  $('date').textContent=fmtDay(today(),{weekday:'long',day:'numeric',month:'long'});
+  const sorted=[...meds].sort((a,b)=>daysLeft(a)-daysLeft(b)||a.name.localeCompare(b.name,'de'));
+  const due=sorted.filter(needsAction),pending=sorted.filter(m=>m.status!=='none'),fine=sorted.filter(m=>m.status==='none'&&!isLow(m));
+  const hero=$('hero');hero.classList.toggle('due',due.length>0);
+  if(!meds.length){
+    $('heroTitle').textContent='Willkommen';
+    $('heroText').textContent='Hier siehst du, wie lange dein Vorrat reicht und wann ein neues Rezept fällig ist.';
+    $('content').innerHTML='<div class="blank"><b>Noch keine Medikamente</b>Trage dein erstes Medikament ein. Der Vorrat zählt danach jeden Tag von selbst herunter.<br><button class="btn primary" data-act="new">Erstes Medikament eintragen</button></div>';
+    return;
+  }
+  if(due.length){
+    const f=due[0],d=daysLeft(f);
+    $('heroTitle').textContent=due.length===1?'1 Rezept jetzt anfordern':`${due.length} Rezepte jetzt anfordern`;
+    $('heroText').textContent=d===0?`${f.name} ist laut Berechnung aufgebraucht.`:`${f.name} reicht noch ${plural(d,'Tag','Tage')}, bis ${shortDay(today()+d)}.`;
+  }else if(pending.length){
+    const d=daysLeft(sorted[0]);
+    $('heroTitle').textContent=pending.length===1?'1 Rezept ist unterwegs':`${pending.length} Rezepte sind unterwegs`;
+    $('heroText').textContent=`Der knappste Vorrat reicht noch ${plural(d,'Tag','Tage')}: ${sorted[0].name}.`;
+  }else{
+    const next=[...fine].sort((a,b)=>(daysLeft(a)-a.warn)-(daysLeft(b)-b.warn))[0],d=daysLeft(next)-next.warn;
+    $('heroTitle').textContent='Alles versorgt';
+    $('heroText').textContent=`Nächste Rezeptanfrage ${d===1?'morgen':'in '+d+' Tagen'}: ${next.name}.`;
+  }
+  $('content').innerHTML=group('Jetzt anfordern',due)+group('Rezept unterwegs',pending)+group('Ausreichend versorgt',fine);
+}
+
+$('content').addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;
+  const act=b.dataset.act;
+  if(act==='new')return openForm();
+  const m=meds.find(x=>x.id===b.dataset.id);if(!m)return;
+  if(act==='edit')return openForm(m);
+  snapshot();
+  if(act==='requested'){m.status='requested';m.statusDay=today();toast(`${m.name}: Rezept angefordert`,true)}
+  if(act==='received'){m.status='received';m.statusDay=today();toast(`${m.name}: Rezept erhalten`,true)}
+  if(act==='refill'){rebase(m);m.quantity=round(m.quantity+m.pack);m.status='none';m.statusDay=null;toast(`${m.name}: ${num(m.pack)} Stück hinzugefügt`,true)}
+  save();
+});
+
+// Eingabeformular
+let editId=null;
+function setVal(id,v){$(id).value=num(v).replace(/\./g,'')}
+function openForm(m){
+  editId=m?m.id:null;
+  $('formTitle').textContent=m?'Medikament bearbeiten':'Neues Medikament';
+  $('fName').value=m?m.name:'';$('fStrength').value=m?m.strength:'';
+  setVal('fQuantity',m?stock(m):30);setVal('fDaily',m?m.daily:1);setVal('fPack',m?m.pack:30);setVal('fWarn',m?m.warn:14);
+  $('fStatus').value=m?m.status:'none';$('err').textContent='';
+  $('del').hidden=!m;$('del').classList.remove('armed');$('del').textContent='Löschen';
+  $('dlg').showModal();
+}
+$('add').onclick=()=>openForm();
+$('cancel').onclick=()=>$('dlg').close();
+$('form').addEventListener('click',e=>{
+  const b=e.target.closest('.stepper button');if(!b)return;
+  const box=b.parentElement,input=box.querySelector('input'),step=+box.dataset.step,min=+box.dataset.min;
+  const cur=parse(input.value);
+  input.value=num(Math.max(min,round((isNaN(cur)?min:cur)+step*+b.dataset.d))).replace(/\./g,'');
+});
+$('form').onsubmit=e=>{
+  e.preventDefault();
+  const name=$('fName').value.trim(),quantity=parse($('fQuantity').value),daily=parse($('fDaily').value),pack=parse($('fPack').value),warn=parse($('fWarn').value);
+  const fail=!name?'Bitte gib einen Namen ein.':!(quantity>=0)?'Der Vorrat muss 0 oder größer sein.':!(daily>0)?'Der Verbrauch pro Tag muss größer als 0 sein.':!(pack>=1)?'Die Packungsgröße muss mindestens 1 sein.':!(warn>=0&&warn<=365)?'Erinnern ab: bitte 0 bis 365 Tage.':'';
+  if(fail){$('err').textContent=fail;return}
+  const old=meds.find(x=>x.id===editId),status=$('fStatus').value;
+  const item={id:editId||uid(),name,strength:$('fStrength').value.trim(),quantity:round(quantity),asOf:today(),daily:round(daily),pack:round(pack),warn:Math.round(warn),status,statusDay:status==='none'?null:(old&&old.status===status?old.statusDay:today())};
+  snapshot();
+  if(old)meds[meds.indexOf(old)]=item;else meds.push(item);
+  $('dlg').close();save();toast(`${name} gesichert`,true);
+};
+$('del').onclick=()=>{
+  const b=$('del');
+  if(!b.classList.contains('armed')){b.classList.add('armed');b.textContent='Wirklich löschen?';return}
+  const m=meds.find(x=>x.id===editId);if(!m)return;
+  snapshot();meds=meds.filter(x=>x!==m);$('dlg').close();save();toast(`${m.name} gelöscht`,true);
+};
+
+// Datensicherung
+$('backup').onclick=()=>{$('bakErr').textContent='';$('bakTextWrap').hidden=true;$('bak').showModal()};
+$('bakClose').onclick=()=>$('bak').close();
+$('bakExport').onclick=async()=>{
+  const text=JSON.stringify({app:'meine-rezepte',version:2,exported:new Date().toISOString(),meds},null,2);
+  const name=`meine-rezepte-${new Date(today()*864e5).toISOString().slice(0,10)}.json`;
+  try{
+    const file=new File([text],name,{type:'application/json'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file]});return}
+  }catch(e){if(e&&e.name==='AbortError')return}
+  $('bakText').value=text;$('bakTextWrap').hidden=false;
+};
+$('bakImport').onclick=()=>$('bakFile').click();
+$('bakFile').onchange=async e=>{
+  const f=e.target.files[0];e.target.value='';if(!f)return;
+  try{
+    const data=JSON.parse(await f.text()),list=Array.isArray(data)?data:data.meds;
+    if(!Array.isArray(list))throw 0;
+    snapshot();meds=list.map(clean);$('bak').close();save();toast(`${plural(meds.length,'Eintrag','Einträge')} wiederhergestellt`,true);
+  }catch(err){$('bakErr').textContent='Diese Datei ist keine gültige Sicherung.'}
+};
+
+// Bildschirm aktuell halten, wenn die App über Mitternacht offen bleibt oder zurückkehrt.
+let shownDay=today();
+setInterval(()=>{if(today()!==shownDay){shownDay=today();render()}},60000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){shownDay=today();render()}});
+
+// Autarker Betrieb
+const standalone=navigator.standalone===true||matchMedia('(display-mode: standalone)').matches;
+$('install').hidden=standalone;
+if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
+function setOffline(t){$('offline').textContent=t}
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js').catch(()=>setOffline('Offline-Speicher konnte nicht eingerichtet werden'));
+  navigator.serviceWorker.ready.then(()=>caches.has('meine-rezepte-v2')).then(ok=>setOffline(ok?'✓ Offline bereit · Daten nur auf diesem iPad':'Offline-Dateien werden geladen …')).catch(()=>{});
+}else setOffline('Offline-Betrieb hier nicht verfügbar');
+
+render();
+</script>
+</body>
+</html>
