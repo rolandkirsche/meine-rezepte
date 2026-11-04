@@ -137,7 +137,7 @@ textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px
   <section class="hero" id="hero" aria-live="polite"><svg class="art" viewBox="0 0 100 100" aria-hidden="true"><g transform="rotate(-40 50 50)"><rect x="8" y="30" width="84" height="40" rx="20" fill="#fff"/></g></svg><h2 id="heroTitle"></h2><p id="heroText"></p><div class="counts" id="heroCounts"></div></section>
   <div class="notice" id="install" hidden><b>Auf den Home-Bildschirm legen:</b> Teilen → Zum Home-Bildschirm. Trage deine Medikamente erst dort ein, denn Safari und die Home-Bildschirm-App speichern getrennt.</div>
   <div id="content"></div>
-  <footer><span id="offline">Offline-Status wird geprüft …</span><button class="btn ghost" id="backup">Datensicherung</button><div id="diag" style="flex-basis:100%;font-size:12px;overflow-wrap:anywhere"></div></footer>
+  <footer><span id="offline">Offline-Status wird geprüft …</span><button class="btn ghost" id="backup">Datensicherung</button></footer>
 </main>
 
 <dialog id="dlg" aria-labelledby="formTitle">
@@ -535,22 +535,7 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden){shownDay=
 const standalone=navigator.standalone===true||matchMedia('(display-mode: standalone)').matches;
 $('install').hidden=standalone;
 if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
-function setOffline(t){$('offline').textContent=t+' · Version 6'}
-// Technik-Anzeige zur Fehlersuche beim Offline-Start
-const startedFromWorker=!!(navigator.serviceWorker&&navigator.serviceWorker.controller);
-async function showDiag(){
-  const parts=[location.pathname,standalone?'Home-Bildschirm':'Safari',startedFromWorker?'Start aus Speicher':'Start aus Netz'];
-  try{
-    const reg=await navigator.serviceWorker.getRegistration();
-    parts.push('Worker '+(reg?(reg.active?reg.active.state:reg.installing?'installiert gerade':reg.waiting?'wartet':'ohne Status'):'fehlt'));
-    if(reg)parts.push('Bereich '+new URL(reg.scope).pathname);
-    parts.push('steuert Seite: '+(navigator.serviceWorker.controller?'ja':'nein'));
-    const names=await caches.keys();let n=0;
-    for(const name of names)n+=(await (await caches.open(name)).keys()).length;
-    parts.push('Speicher '+(names.join('+')||'leer')+' ('+n+' Dateien)');
-  }catch(e){parts.push('Fehler '+(e&&e.name))}
-  $('diag').textContent='Technik: '+parts.join(' · ');
-}
+function setOffline(t){$('offline').textContent=t+' · Version 7'}
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>setOffline('Offline-Speicher konnte nicht eingerichtet werden'));
   // „Bereit“ erst melden, wenn der Worker diese Seite steuert und die Datei wirklich gespeichert ist.
@@ -558,8 +543,8 @@ if('serviceWorker' in navigator){
     const on=!!navigator.serviceWorker.controller;
     setOffline(on&&hit?'✓ Offline bereit · Daten nur auf diesem iPad':!hit?'Noch nicht offline bereit: Dateien fehlen. App mit Internet neu öffnen.':'Noch nicht offline bereit: App einmal schließen und mit Internet neu öffnen.');
   }).catch(()=>setOffline('Noch nicht offline bereit: Speicher nicht verfügbar.'));
-  showDiag();navigator.serviceWorker.ready.then(checkOffline).then(showDiag);
-  navigator.serviceWorker.addEventListener('controllerchange',()=>{checkOffline();showDiag()});
+  navigator.serviceWorker.ready.then(checkOffline);
+  navigator.serviceWorker.addEventListener('controllerchange',checkOffline);
 }else setOffline('Offline-Betrieb hier nicht verfügbar');
 
 render();
