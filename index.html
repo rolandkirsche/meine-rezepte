@@ -343,7 +343,13 @@ if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catc
 function setOffline(t){$('offline').textContent=t}
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>setOffline('Offline-Speicher konnte nicht eingerichtet werden'));
-  navigator.serviceWorker.ready.then(()=>caches.has('meine-rezepte-v2')).then(ok=>setOffline(ok?'✓ Offline bereit · Daten nur auf diesem iPad':'Offline-Dateien werden geladen …')).catch(()=>{});
+  // „Bereit“ erst melden, wenn der Worker diese Seite steuert und die Datei wirklich gespeichert ist.
+  const checkOffline=()=>caches.match('./index.html').then(hit=>{
+    const on=!!navigator.serviceWorker.controller;
+    setOffline(on&&hit?'✓ Offline bereit · Daten nur auf diesem iPad':!hit?'Noch nicht offline bereit: Dateien fehlen. App mit Internet neu öffnen.':'Noch nicht offline bereit: App einmal schließen und mit Internet neu öffnen.');
+  }).catch(()=>setOffline('Noch nicht offline bereit: Speicher nicht verfügbar.'));
+  navigator.serviceWorker.ready.then(checkOffline);
+  navigator.serviceWorker.addEventListener('controllerchange',checkOffline);
 }else setOffline('Offline-Betrieb hier nicht verfügbar');
 
 render();

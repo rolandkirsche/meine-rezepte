@@ -1,6 +1,6 @@
 // Antwortet immer zuerst aus dem Speicher (funktioniert offline) und holt im
 // Hintergrund neue Dateien, die beim nächsten Start der App aktiv sind.
-const CACHE = 'meine-rezepte-v2';
+const CACHE = 'meine-rezepte-v3';
 const FILES = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-180.png', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', event => {
@@ -18,18 +18,21 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const request = event.request;
   if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
-  event.respondWith((async () => {
-    const cache = await caches.open(CACHE);
-    const cached = await cache.match(request, { ignoreSearch: true })
-      || (request.mode === 'navigate' ? await cache.match('./index.html') : undefined);
-    const network = fetch(request).then(response => {
-      if (response.ok && !response.redirected) cache.put(request, response.clone());
-      return response;
-    });
-    if (cached) {
-      event.waitUntil(network.catch(() => {}));
-      return cached;
+
+  // waitUntil muss synchron laufen: Safari 15 kann spätere Aufrufe ablehnen.
+  const network = fetch(request).then(async response => {
+    if (response.ok && !response.redirected) {
+      const cache = await caches.open(CACHE);
+      await cache.put(request, response.clone());
     }
-    return network;
-  })());
+    return response;
+  });
+  event.waitUntil(network.catch(() => {}));
+
+  event.respondWith(
+    caches.open(CACHE)
+      .then(cache => cache.match(request, { ignoreSearch: true })
+        .then(hit => hit || (request.mode === 'navigate' ? cache.match('./index.html') : undefined)))
+      .then(hit => hit || network)
+  );
 });
