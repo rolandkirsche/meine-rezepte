@@ -1,10 +1,13 @@
 // Antwortet immer zuerst aus dem Speicher (funktioniert offline) und holt im
 // Hintergrund neue Dateien, die beim nächsten Start der App aktiv sind.
-const CACHE = 'meine-rezepte-v3';
+const CACHE = 'meine-rezepte-v4';
 const FILES = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-180.png', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)).then(() => self.skipWaiting()));
+  event.waitUntil(caches.open(CACHE)
+    // cache: 'reload' umgeht den Browser-Zwischenspeicher, sonst könnte ein Update alte Dateien speichern.
+    .then(cache => cache.addAll(FILES.map(url => new Request(url, { cache: 'reload' }))))
+    .then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', event => {
@@ -20,7 +23,7 @@ self.addEventListener('fetch', event => {
   if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
 
   // waitUntil muss synchron laufen: Safari 15 kann spätere Aufrufe ablehnen.
-  const network = fetch(request).then(async response => {
+  const network = fetch(request.url, { cache: 'no-cache' }).then(async response => {
     if (response.ok && !response.redirected) {
       const cache = await caches.open(CACHE);
       await cache.put(request, response.clone());
