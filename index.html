@@ -16,14 +16,14 @@
 :root{
   --bg:#f4f1ea;--surface:#fffdf8;--sunk:#ebe7dc;--ink:#1d2b26;--muted:#65716b;--line:#e2ddd0;
   --brand:#1f5c4a;--on-brand:#fff;--warn:#a94f1b;--warn-soft:#f9e9db;--ok:#2f7d63;--ok-soft:#e1efe8;
-  --danger:#a8322a;--danger-soft:#f8e2df;--hero:#1f5c4a;--hero-due:#9a4718;
+  --danger:#a8322a;--danger-soft:#f8e2df;--hero:#1f5c4a;--hero-2:#2f7a63;--hero-due:#94431a;--hero-due-2:#bd6227;
   --serif:ui-serif,"New York",Georgia,serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root{
   --bg:#121815;--surface:#1b2420;--sunk:#27322d;--ink:#eef1ea;--muted:#9eaba3;--line:#2d3933;
   --brand:#74c5a7;--on-brand:#0e1f19;--warn:#ec9c66;--warn-soft:#3a281b;--ok:#74c5a7;--ok-soft:#1f3229;
-  --danger:#f0877c;--danger-soft:#3c1f1c;--hero:#1c4a3c;--hero-due:#7c3d17;
+  --danger:#f0877c;--danger-soft:#3c1f1c;--hero:#173f33;--hero-2:#23614e;--hero-due:#6f3614;--hero-due-2:#94501f;
   color-scheme:dark;
 }}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -37,22 +37,35 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 .date{color:var(--muted);font-size:15px}
 h1{font:600 36px/1.1 var(--serif);letter-spacing:-.4px;margin:2px 0 0}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:46px;padding:10px 18px;border:0;border-radius:14px;font-weight:600;background:var(--sunk);color:var(--ink);white-space:nowrap}
+.btn svg{width:20px;height:20px;flex:none}
+.btn:active{transform:scale(.97)}
+.btn{transition:transform .12s ease}
+.top-acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .btn.primary{background:var(--brand);color:var(--on-brand)}
 .btn.warn{background:var(--warn);color:#fff}
 .btn.ghost{background:transparent;color:var(--muted);padding-inline:12px}
 .btn.danger{background:transparent;color:var(--danger);padding-inline:6px}
 .btn.danger.armed{background:var(--danger);color:#fff;padding-inline:18px}
 @media (prefers-color-scheme:dark){.btn.warn{color:#26150a}.btn.danger.armed{color:#2a100d}}
-.hero{background:var(--hero);color:#fff;border-radius:24px;padding:26px 28px;margin-bottom:12px}
-.hero.due{background:var(--hero-due)}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--hero),var(--hero-2));color:#fff;border-radius:28px;padding:28px 30px;margin-bottom:12px;box-shadow:0 14px 34px rgba(20,50,40,.18)}
+.hero>*{position:relative}
+.hero .art{position:absolute;right:-18px;top:-26px;width:190px;height:190px;opacity:.09}
+.counts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.count{background:rgba(255,255,255,.15);border-radius:999px;padding:6px 13px;font-size:14px;font-weight:600}
+.hero.due{background:linear-gradient(135deg,var(--hero-due),var(--hero-due-2))}
 .hero h2{font:600 30px/1.15 var(--serif);margin:0 0 6px}
 .hero p{margin:0;opacity:.9;font-size:17px}
 .notice{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 18px;font-size:15px;color:var(--muted);margin-top:12px}
 .notice b{color:var(--ink)}
-.group{font-size:14px;font-weight:600;color:var(--muted);margin:26px 2px 10px}
+.group{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--muted);margin:26px 2px 10px}
+.group i{font-style:normal;background:var(--sunk);border-radius:999px;min-width:22px;padding:1px 7px;text-align:center;font-size:13px}
 .meds{display:grid;gap:12px;grid-template-columns:1fr}
 @media (min-width:900px){.meds{grid-template-columns:1fr 1fr}}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px 20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:18px 20px;display:flex;flex-direction:column;gap:12px;min-width:0;box-shadow:0 4px 16px rgba(30,40,30,.05)}
+@media (prefers-reduced-motion:reduce){.laser{animation:none!important}.btn{transition:none}}
+.who{display:flex;gap:13px;min-width:0;align-items:center}
+.ava{flex:none;width:52px;height:52px;border-radius:16px;display:grid;place-items:center}
+.ava svg{width:38px;height:38px}
 .head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
 .title{min-width:0}
 .name{font:600 21px/1.2 var(--serif);overflow-wrap:anywhere}
@@ -96,6 +109,21 @@ label{display:block;font-size:14px;font-weight:600;color:var(--muted);margin:14p
 textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);padding:10px;font:13px/1.4 ui-monospace,Menlo,monospace}
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 20px);transform:translateX(-50%);display:flex;align-items:center;gap:6px;max-width:calc(100vw - 32px);background:#1d2b26;color:#fff;border-radius:16px;padding:6px 6px 6px 18px;box-shadow:0 12px 40px rgba(10,20,15,.35);font-size:15px}
 .toast button{border:0;background:transparent;color:#9fe0c6;font-weight:600;min-height:42px;padding:0 12px}
+.viewport{position:relative;background:#101613;border-radius:18px;overflow:hidden;aspect-ratio:4/3;max-height:52vh;width:100%}
+.viewport video{width:100%;height:100%;object-fit:cover;display:block}
+.frame{position:absolute;left:15%;right:15%;top:20%;bottom:20%;border:3px solid rgba(255,255,255,.9);border-radius:16px;box-shadow:0 0 0 999px rgba(0,0,0,.28)}
+.laser{position:absolute;left:6%;right:6%;top:50%;height:2px;background:#e8a06a;animation:scan 2.2s ease-in-out infinite alternate}
+@keyframes scan{from{top:12%}to{top:88%}}
+.scan-msg{color:var(--muted);font-size:15px;margin:12px 0;min-height:42px}
+.scan-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.scan-row .field{flex:1 1 150px;width:auto}
+.filebtn{position:relative;overflow:hidden}
+.filebtn input{position:absolute;inset:0;opacity:0;font-size:40px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:4px;background:var(--sunk);border-radius:999px;padding:3px 4px 3px 12px;font-size:14px}
+.chip button{border:0;background:transparent;width:30px;height:30px;font-size:18px;color:var(--muted)}
+.chip-none{color:var(--muted);font-size:15px}
+.stack{display:flex;flex-direction:column;gap:8px;margin-top:14px}
 [hidden]{display:none!important}
 @media (max-width:560px){.wrap{padding-left:16px;padding-right:16px}h1{font-size:30px}.hero{padding:20px}.hero h2{font-size:25px}}
 </style>
@@ -104,9 +132,9 @@ textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px
 <main class="wrap">
   <header class="top">
     <div><div class="date" id="date"></div><h1>Meine Rezepte</h1></div>
-    <button class="btn primary" id="add" aria-label="Medikament hinzufügen">+ Medikament</button>
+    <div class="top-acts"><button class="btn" id="scanOpen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2M8 9v6M12 9v6M16 9v6"/></svg>Scannen</button><button class="btn primary" id="add" aria-label="Medikament hinzufügen">+ Medikament</button></div>
   </header>
-  <section class="hero" id="hero" aria-live="polite"><h2 id="heroTitle"></h2><p id="heroText"></p></section>
+  <section class="hero" id="hero" aria-live="polite"><svg class="art" viewBox="0 0 100 100" aria-hidden="true"><g transform="rotate(-40 50 50)"><rect x="8" y="30" width="84" height="40" rx="20" fill="#fff"/></g></svg><h2 id="heroTitle"></h2><p id="heroText"></p><div class="counts" id="heroCounts"></div></section>
   <div class="notice" id="install" hidden><b>Auf den Home-Bildschirm legen:</b> Teilen → Zum Home-Bildschirm. Trage deine Medikamente erst dort ein, denn Safari und die Home-Bildschirm-App speichern getrennt.</div>
   <div id="content"></div>
   <footer><span id="offline">Offline-Status wird geprüft …</span><button class="btn ghost" id="backup">Datensicherung</button></footer>
@@ -129,6 +157,8 @@ textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px
     </div>
     <label for="fStatus">Rezept</label>
     <select class="field" id="fStatus"><option value="none">Kein Rezept unterwegs</option><option value="requested">Angefordert</option><option value="received">Erhalten, noch nicht eingelöst</option></select>
+    <label>Verknüpfte Packungscodes</label>
+    <div class="chips" id="fCodes"></div>
     <div class="error" id="err" role="alert"></div>
     <div class="sheet-foot">
       <button type="button" class="btn danger" id="del" hidden>Löschen</button>
@@ -149,6 +179,30 @@ textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px
     <div id="bakTextWrap" hidden><label for="bakText">Sicherung (Text kopieren und aufbewahren)</label><textarea id="bakText" readonly></textarea></div>
     <div class="error" id="bakErr" role="alert"></div>
     <div class="sheet-foot"><div><button class="btn" id="bakClose">Schließen</button></div></div>
+  </div>
+</dialog>
+
+<dialog id="scanDlg" aria-labelledby="scanTitle">
+  <div class="sheet">
+    <div class="sheet-head"><h2 id="scanTitle">Packung scannen</h2></div>
+    <div class="viewport" id="viewport" hidden><video id="video" muted playsinline autoplay></video><div class="frame"><div class="laser"></div></div></div>
+    <p class="scan-msg" id="scanMsg" role="status"></p>
+    <div class="scan-row">
+      <label class="btn filebtn" style="margin:0;color:var(--ink)">Foto verwenden<input type="file" id="scanPhoto" accept="image/*" capture="environment" aria-label="Foto der Packung"></label>
+      <input class="field" id="scanManual" inputmode="numeric" autocomplete="off" maxlength="20" placeholder="oder PZN eintippen" aria-label="PZN eintippen">
+      <button class="btn" id="scanManualOk">OK</button>
+    </div>
+    <div class="sheet-foot"><div><button class="btn" id="scanClose">Schließen</button></div></div>
+  </div>
+</dialog>
+
+<dialog id="hit" aria-labelledby="hitTitle">
+  <div class="sheet">
+    <div class="sheet-head"><h2 id="hitTitle"></h2></div>
+    <p class="note" id="hitText" style="margin:0"></p>
+    <div class="stack" id="hitKnown"><button class="btn primary" id="hitAdd"></button><button class="btn" id="hitEdit">Medikament bearbeiten</button></div>
+    <div class="stack" id="hitNewBox"><button class="btn primary" id="hitNew">Neues Medikament anlegen</button><div id="hitLinkBox"><label for="hitSel">Oder mit vorhandenem Medikament verknüpfen</label><select class="field" id="hitSel"></select><div class="stack"><button class="btn" id="hitLink">Verknüpfen</button></div></div></div>
+    <div class="sheet-foot"><div><button class="btn ghost" id="hitAgain">Nochmal scannen</button><button class="btn" id="hitCancel">Schließen</button></div></div>
   </div>
 </dialog>
 
@@ -176,7 +230,8 @@ function clean(m){
   return {id:String(m.id||uid()),name:String(m.name||'Ohne Namen').slice(0,80),strength:String(m.strength||'').slice(0,50),
     quantity:Math.max(0,+m.quantity||0),asOf:Number.isInteger(m.asOf)?m.asOf:today(),daily,
     pack:+m.pack>=1?+m.pack:30,warn:+m.warn>=0?+m.warn:14,
-    status:['none','requested','received'].includes(m.status)?m.status:'none',statusDay:Number.isInteger(m.statusDay)?m.statusDay:null};
+    status:['none','requested','received'].includes(m.status)?m.status:'none',statusDay:Number.isInteger(m.statusDay)?m.statusDay:null,
+    codes:Array.isArray(m.codes)?m.codes.filter(c=>typeof c==='string').slice(0,20):[]};
 }
 let meds=[];
 try{const raw=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(raw))meds=raw.map(clean)}catch(e){}
@@ -203,6 +258,12 @@ function toast(text,canUndo){
 }
 $('toastUndo').onclick=()=>{if(undoState){meds=JSON.parse(undoState);undoState=null;save()}$('toast').hidden=true};
 
+const AVA=[['#1f7a5f','#d9efe6'],['#b65a24','#f8e6d8'],['#2f6bab','#dfeaf6'],['#7a4d9c','#ece2f4'],['#a5801a','#f3ebcf'],['#b0436b','#f7e0e9']];
+function avatar(name){
+  let h=0;for(const ch of name)h=(h*31+ch.codePointAt(0))>>>0;
+  const [c,bg]=AVA[h%AVA.length];
+  return `<div class="ava" style="background:${bg}" aria-hidden="true"><svg viewBox="0 0 48 48"><g transform="rotate(-40 24 24)"><rect x="5" y="14" width="38" height="20" rx="10" fill="${c}"/><path d="M24 14H15a10 10 0 0 0 0 20h9z" fill="#fff"/><rect x="5.5" y="14.5" width="37" height="19" rx="9.5" fill="none" stroke="${c}"/></g></svg></div>`;
+}
 function cardHtml(m){
   const left=daysLeft(m),until=today()+left,low=isLow(m),empty=isEmpty(m);
   const scale=Math.max(left,m.warn*2,Math.ceil(m.pack/m.daily),1);
@@ -223,19 +284,20 @@ function cardHtml(m){
   }
   const sub=[m.strength?esc(m.strength):'',`${esc(num(stock(m)))} Stück`,`${esc(num(m.daily))} pro Tag`].filter(Boolean).join(' · ');
   return `<article class="card${low?' low':''}${empty?' empty':''}">
-    <div class="head"><div class="title"><div class="name">${esc(m.name)}</div><div class="sub">${sub}</div></div>
+    <div class="head"><div class="who">${avatar(m.name)}<div class="title"><div class="name">${esc(m.name)}</div><div class="sub">${sub}</div></div></div>
     <div class="days"><b>${left}</b><small>${left===1?'Tag':'Tage'} Vorrat</small></div></div>
     <div class="bar"><div class="fill" style="width:${fill.toFixed(1)}%"></div><div class="tick" style="left:${tick.toFixed(1)}%"></div></div>
     <div class="foot"><div class="state">${state}</div><div class="acts"><button class="btn ghost" data-act="edit" data-id="${esc(m.id)}">Bearbeiten</button>${act}</div></div>
   </article>`;
 }
-function group(title,list){return list.length?`<h2 class="group">${title}</h2><div class="meds">${list.map(cardHtml).join('')}</div>`:''}
+function group(title,list){return list.length?`<h2 class="group">${title}<i>${list.length}</i></h2><div class="meds">${list.map(cardHtml).join('')}</div>`:''}
 
 function render(){
   $('date').textContent=fmtDay(today(),{weekday:'long',day:'numeric',month:'long'});
   const sorted=[...meds].sort((a,b)=>daysLeft(a)-daysLeft(b)||a.name.localeCompare(b.name,'de'));
   const due=sorted.filter(needsAction),pending=sorted.filter(m=>m.status!=='none'),fine=sorted.filter(m=>m.status==='none'&&!isLow(m));
   const hero=$('hero');hero.classList.toggle('due',due.length>0);
+  $('heroCounts').innerHTML=meds.length?[plural(meds.length,'Medikament','Medikamente'),due.length?`${due.length} anzufordern`:'',pending.length?`${pending.length} unterwegs`:''].filter(Boolean).map(t=>`<span class="count">${esc(t)}</span>`).join(''):'';
   if(!meds.length){
     $('heroTitle').textContent='Willkommen';
     $('heroText').textContent='Hier siehst du, wie lange dein Vorrat reicht und wann ein neues Rezept fällig ist.';
@@ -258,24 +320,30 @@ function render(){
   $('content').innerHTML=group('Jetzt anfordern',due)+group('Rezept unterwegs',pending)+group('Ausreichend versorgt',fine);
 }
 
+function refill(m){rebase(m);m.quantity=round(m.quantity+m.pack);m.status='none';m.statusDay=null;toast(`${m.name}: ${num(m.pack)} Stück hinzugefügt`,true)}
 $('content').addEventListener('click',e=>{
   const b=e.target.closest('[data-act]');if(!b)return;
   const act=b.dataset.act;
-  if(act==='new')return openForm();
+  if(act==='new')return openForm(null);
   const m=meds.find(x=>x.id===b.dataset.id);if(!m)return;
   if(act==='edit')return openForm(m);
   snapshot();
   if(act==='requested'){m.status='requested';m.statusDay=today();toast(`${m.name}: Rezept angefordert`,true)}
   if(act==='received'){m.status='received';m.statusDay=today();toast(`${m.name}: Rezept erhalten`,true)}
-  if(act==='refill'){rebase(m);m.quantity=round(m.quantity+m.pack);m.status='none';m.statusDay=null;toast(`${m.name}: ${num(m.pack)} Stück hinzugefügt`,true)}
+  if(act==='refill')refill(m);
   save();
 });
 
 // Eingabeformular
-let editId=null;
+let editId=null,editCodes=[];
+function codeLabel(k){return k.replace(':',' ')}
+function renderCodes(){
+  $('fCodes').innerHTML=editCodes.length?editCodes.map(c=>`<span class="chip">${esc(codeLabel(c))}<button type="button" data-code="${esc(c)}" aria-label="Code entfernen">×</button></span>`).join(''):'<span class="chip-none">Noch keiner. Verknüpfen geht über „Scannen“.</span>';
+}
+$('fCodes').addEventListener('click',e=>{const b=e.target.closest('[data-code]');if(b){editCodes=editCodes.filter(c=>c!==b.dataset.code);renderCodes()}});
 function setVal(id,v){$(id).value=num(v).replace(/\./g,'')}
-function openForm(m){
-  editId=m?m.id:null;
+function openForm(m,codes){
+  editId=m?m.id:null;editCodes=m?[...m.codes]:(codes||[]);renderCodes();
   $('formTitle').textContent=m?'Medikament bearbeiten':'Neues Medikament';
   $('fName').value=m?m.name:'';$('fStrength').value=m?m.strength:'';
   setVal('fQuantity',m?stock(m):30);setVal('fDaily',m?m.daily:1);setVal('fPack',m?m.pack:30);setVal('fWarn',m?m.warn:14);
@@ -283,7 +351,7 @@ function openForm(m){
   $('del').hidden=!m;$('del').classList.remove('armed');$('del').textContent='Löschen';
   $('dlg').showModal();
 }
-$('add').onclick=()=>openForm();
+$('add').onclick=()=>openForm(null);
 $('cancel').onclick=()=>$('dlg').close();
 $('form').addEventListener('click',e=>{
   const b=e.target.closest('.stepper button');if(!b)return;
@@ -297,7 +365,7 @@ $('form').onsubmit=e=>{
   const fail=!name?'Bitte gib einen Namen ein.':!(quantity>=0)?'Der Vorrat muss 0 oder größer sein.':!(daily>0)?'Der Verbrauch pro Tag muss größer als 0 sein.':!(pack>=1)?'Die Packungsgröße muss mindestens 1 sein.':!(warn>=0&&warn<=365)?'Erinnern ab: bitte 0 bis 365 Tage.':'';
   if(fail){$('err').textContent=fail;return}
   const old=meds.find(x=>x.id===editId),status=$('fStatus').value;
-  const item={id:editId||uid(),name,strength:$('fStrength').value.trim(),quantity:round(quantity),asOf:today(),daily:round(daily),pack:round(pack),warn:Math.round(warn),status,statusDay:status==='none'?null:(old&&old.status===status?old.statusDay:today())};
+  const item={id:editId||uid(),name,strength:$('fStrength').value.trim(),quantity:round(quantity),asOf:today(),daily:round(daily),pack:round(pack),warn:Math.round(warn),status,statusDay:status==='none'?null:(old&&old.status===status?old.statusDay:today()),codes:editCodes};
   snapshot();
   if(old)meds[meds.indexOf(old)]=item;else meds.push(item);
   $('dlg').close();save();toast(`${name} gesichert`,true);
@@ -308,6 +376,133 @@ $('del').onclick=()=>{
   const m=meds.find(x=>x.id===editId);if(!m)return;
   snapshot();meds=meds.filter(x=>x!==m);$('dlg').close();save();toast(`${m.name} gelöscht`,true);
 };
+
+// Packungscodes: Es wird nur die Produktnummer gespeichert, nie Charge oder Seriennummer.
+function validPzn(p){
+  if(!/^\d{8}$/.test(p))return false;
+  let sum=0;for(let i=0;i<7;i++)sum+=(i+1)*+p[i];
+  return sum%11===+p[7];
+}
+function parseCode(raw){
+  const s=String(raw||'').trim().replace(/^\]d2/,'');
+  let m=s.match(/(?:^|[\x1d\x1e])9N11(\d{8})/);          // securPharm-Datamatrix (IFA)
+  if(m)return validPzn(m[1])?'PZN:'+m[1]:null;
+  m=s.match(/^\x1d?01(\d{14})/);                         // GS1-Datamatrix
+  if(m){
+    const g=m[1];
+    if(g.startsWith('04150')&&validPzn(g.slice(5,13)))return 'PZN:'+g.slice(5,13);
+    return 'GTIN:'+g;
+  }
+  m=s.match(/^(?:PZN)?[- ]?(\d{7,8})$/i);                // Code 39 oder Eingabe
+  if(m){const p=m[1].padStart(8,'0');return validPzn(p)?'PZN:'+p:null}
+  if(/^\d{13}$/.test(s))return 'EAN:'+s;
+  return null;
+}
+let zxLoad=null,zxReader=null;
+function loadZX(){
+  return zxLoad||(zxLoad=new Promise((ok,no)=>{const t=document.createElement('script');t.src='vendor/zxing.min.js';t.onload=ok;t.onerror=()=>{zxLoad=null;no(new Error('load'))};document.head.appendChild(t)}));
+}
+function decodeCanvas(c){
+  if(!zxReader){
+    zxReader=new ZXing.MultiFormatReader();
+    const f=ZXing.BarcodeFormat,h=new Map();
+    h.set(ZXing.DecodeHintType.POSSIBLE_FORMATS,[f.DATA_MATRIX,f.CODE_39,f.EAN_13]);
+    h.set(ZXing.DecodeHintType.TRY_HARDER,true);
+    zxReader.setHints(h);
+  }
+  try{return zxReader.decode(new ZXing.BinaryBitmap(new ZXing.HybridBinarizer(new ZXing.HTMLCanvasElementLuminanceSource(c)))).getText()}
+  catch(e){return null}
+}
+let stream=null,scanTimer=0,scanning=false;
+const scanCanvas=document.createElement('canvas');
+function stopCamera(){
+  scanning=false;clearTimeout(scanTimer);
+  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}
+  $('video').srcObject=null;
+}
+function scanTick(){
+  if(!scanning)return;
+  const v=$('video');
+  if(v.videoWidth){
+    const w=Math.round(v.videoWidth*.7),h=Math.round(v.videoHeight*.6);
+    scanCanvas.width=w;scanCanvas.height=h;
+    scanCanvas.getContext('2d').drawImage(v,(v.videoWidth-w)/2,(v.videoHeight-h)/2,w,h,0,0,w,h);
+    const text=decodeCanvas(scanCanvas),key=text&&parseCode(text);
+    if(key){gotCode(key);return}
+  }
+  scanTimer=setTimeout(scanTick,250);
+}
+async function openScanner(){
+  $('scanMsg').textContent='Scanner wird vorbereitet …';$('scanManual').value='';$('viewport').hidden=true;
+  $('scanDlg').showModal();
+  try{await loadZX()}catch(e){$('scanMsg').textContent='Der Scanner konnte nicht geladen werden. Du kannst die PZN eintippen.';return}
+  if(!$('scanDlg').open)return;
+  if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){$('scanMsg').textContent='Live-Kamera ist hier nicht verfügbar. Nimm ein Foto auf oder tippe die PZN ein.';return}
+  try{
+    const st=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}}});
+    if(!$('scanDlg').open){st.getTracks().forEach(t=>t.stop());return}
+    stream=st;$('viewport').hidden=false;
+    const v=$('video');v.srcObject=st;await v.play();
+    $('scanMsg').textContent='Halte den Barcode oder das Datenquadrat der Packung in den Rahmen.';
+    scanning=true;scanTick();
+  }catch(e){
+    stopCamera();$('viewport').hidden=true;
+    $('scanMsg').textContent='Live-Kamera nicht verfügbar. Nimm ein Foto auf oder tippe die PZN ein.';
+  }
+}
+function drawRotated(img,deg){
+  const k=Math.min(1,1600/Math.max(img.naturalWidth,img.naturalHeight)),w=Math.round(img.naturalWidth*k),h=Math.round(img.naturalHeight*k);
+  const c=document.createElement('canvas');const side=deg%180!==0;c.width=side?h:w;c.height=side?w:h;
+  const x=c.getContext('2d');x.translate(c.width/2,c.height/2);x.rotate(deg*Math.PI/180);x.drawImage(img,-w/2,-h/2,w,h);
+  return c;
+}
+$('scanPhoto').onchange=async e=>{
+  const f=e.target.files[0];e.target.value='';if(!f)return;
+  stopCamera();$('viewport').hidden=true;$('scanMsg').textContent='Foto wird gelesen …';
+  try{
+    await loadZX();
+    const url=URL.createObjectURL(f),img=new Image();
+    await new Promise((ok,no)=>{img.onload=ok;img.onerror=no;img.src=url});
+    let key=null;
+    for(const d of [0,90]){const t=decodeCanvas(drawRotated(img,d));key=t&&parseCode(t);if(key)break}
+    URL.revokeObjectURL(url);
+    if(key)gotCode(key);else $('scanMsg').textContent='Im Foto wurde kein passender Code gefunden. Fotografiere den Code näher und scharf, oder tippe die PZN ein.';
+  }catch(err){$('scanMsg').textContent='Das Foto konnte nicht gelesen werden. Du kannst die PZN eintippen.'}
+};
+$('scanManualOk').onclick=()=>{
+  const key=parseCode($('scanManual').value);
+  if(key)gotCode(key);else $('scanMsg').textContent='Diese PZN ist ungültig. Bitte prüfe die Nummer.';
+};
+$('scanOpen').onclick=openScanner;
+$('scanClose').onclick=()=>$('scanDlg').close();
+$('scanDlg').addEventListener('close',stopCamera);
+let hitKey=null;
+function gotCode(key){
+  stopCamera();if($('scanDlg').open)$('scanDlg').close();
+  hitKey=key;
+  const m=meds.find(x=>x.codes.includes(key)),others=[...meds].sort((a,b)=>a.name.localeCompare(b.name,'de'));
+  $('hitKnown').hidden=!m;$('hitNewBox').hidden=!!m;
+  if(m){
+    $('hitTitle').textContent=m.name;
+    $('hitText').textContent=`${codeLabel(key)} erkannt. Aktueller Vorrat: ${num(stock(m))} Stück.`;
+    $('hitAdd').textContent=`Packung einbuchen: +${num(m.pack)} Stück`;
+  }else{
+    $('hitTitle').textContent='Neuer Packungscode';
+    $('hitText').textContent=`${codeLabel(key)} gehört noch zu keinem Medikament. Der Code enthält keinen Namen, deshalb ordnest du ihn einmal selbst zu.`;
+    $('hitLinkBox').hidden=!others.length;
+    $('hitSel').innerHTML=others.map(x=>`<option value="${esc(x.id)}">${esc(x.name)}</option>`).join('');
+  }
+  $('hit').showModal();
+}
+$('hitAdd').onclick=()=>{const m=meds.find(x=>x.codes.includes(hitKey));if(!m)return;snapshot();refill(m);$('hit').close();save()};
+$('hitEdit').onclick=()=>{const m=meds.find(x=>x.codes.includes(hitKey));$('hit').close();if(m)openForm(m)};
+$('hitNew').onclick=()=>{$('hit').close();openForm(null,[hitKey])};
+$('hitLink').onclick=()=>{
+  const m=meds.find(x=>x.id===$('hitSel').value);if(!m)return;
+  snapshot();m.codes=[...new Set([...m.codes,hitKey])];$('hit').close();save();toast(`${codeLabel(hitKey)} mit ${m.name} verknüpft`,true);
+};
+$('hitAgain').onclick=()=>{$('hit').close();openScanner()};
+$('hitCancel').onclick=()=>$('hit').close();
 
 // Datensicherung
 $('backup').onclick=()=>{$('bakErr').textContent='';$('bakTextWrap').hidden=true;$('bak').showModal()};
@@ -340,7 +535,7 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden){shownDay=
 const standalone=navigator.standalone===true||matchMedia('(display-mode: standalone)').matches;
 $('install').hidden=standalone;
 if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
-function setOffline(t){$('offline').textContent=t+' · Version 4'}
+function setOffline(t){$('offline').textContent=t+' · Version 5'}
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>setOffline('Offline-Speicher konnte nicht eingerichtet werden'));
   // „Bereit“ erst melden, wenn der Worker diese Seite steuert und die Datei wirklich gespeichert ist.
