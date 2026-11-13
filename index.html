@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="icon" href="icon-macos.png" type="image/png" sizes="1024x1024">
 <title>Meine Rezepte</title>
 <style>
 :root{
@@ -535,7 +535,7 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden){shownDay=
 const standalone=navigator.standalone===true||matchMedia('(display-mode: standalone)').matches;
 $('install').hidden=standalone;
 if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
-function setOffline(t){$('offline').textContent=t+' · Version 8'}
+function setOffline(t){$('offline').textContent=t+' · Version 9'}
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>setOffline('Offline-Speicher konnte nicht eingerichtet werden'));
   // „Bereit“ erst melden, wenn der Worker diese Seite steuert und die Datei wirklich gespeichert ist.

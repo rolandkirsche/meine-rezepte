@@ -19,6 +19,8 @@ Unter „Sicherung“ erstellt die App eine JSON-Datei mit allen Einträgen. „
 
 `icon.svg` ist die Vorlage. Die Dateien `icon-180.png` (Home-Bildschirm des iPad) sowie `icon-192.png` und `icon-512.png` (Manifest) werden daraus erzeugt. Nach einer Änderung müssen alle drei PNGs neu erzeugt werden. iOS speichert das Icon beim Hinzufügen zum Home-Bildschirm. Ein neues Icon erscheint deshalb erst, wenn die App dort neu hinzugefügt wird. Vorher eine Sicherung erstellen.
 
+`icon-macos.png` (1024 × 1024) ist eine Variante mit runden Ecken, Rand und Schatten im macOS-Stil. Sie dient als Icon im Browser-Tab (`<link rel="icon">` in `index.html`). `icon.svg` bleibt die Vorlage für die übrigen PNGs. Diese bleiben eckig, weil iOS die Ecken selbst abrundet.
+
 ## Updates
 
 Bei jeder Änderung die Cache-Version in `sw.js` (`meine-rezepte-vN`) und die Version in der Fußzeile von `index.html` gemeinsam erhöhen. Die App lädt die neuen Dateien im Hintergrund und nutzt sie ab dem nächsten Start.
