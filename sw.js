@@ -1,6 +1,6 @@
 // Antwortet immer zuerst aus dem Speicher (funktioniert offline) und holt im
 // Hintergrund neue Dateien, die beim nächsten Start der App aktiv sind.
-const CACHE = 'meine-rezepte-v7';
+const CACHE = 'meine-rezepte-v8';
 const FILES = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-180.png', './icon-192.png', './icon-512.png', './vendor/zxing.min.js'];
 
 self.addEventListener('install', event => {

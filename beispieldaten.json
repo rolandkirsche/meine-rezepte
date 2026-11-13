@@ -1,0 +1,72 @@
+{
+  "app": "meine-rezepte",
+  "version": 2,
+  "exported": "2026-11-13T12:00:00.000Z",
+  "meds": [
+    {
+      "id": "beispiel-1",
+      "name": "Ramipril",
+      "strength": "5 mg",
+      "quantity": 84,
+      "asOf": 20770,
+      "daily": 1,
+      "pack": 100,
+      "warn": 14,
+      "status": "none",
+      "statusDay": null,
+      "codes": []
+    },
+    {
+      "id": "beispiel-2",
+      "name": "Metformin",
+      "strength": "1000 mg",
+      "quantity": 20,
+      "asOf": 20770,
+      "daily": 2,
+      "pack": 180,
+      "warn": 14,
+      "status": "none",
+      "statusDay": null,
+      "codes": []
+    },
+    {
+      "id": "beispiel-3",
+      "name": "Simvastatin",
+      "strength": "20 mg",
+      "quantity": 9,
+      "asOf": 20770,
+      "daily": 1,
+      "pack": 100,
+      "warn": 14,
+      "status": "requested",
+      "statusDay": 20768,
+      "codes": []
+    },
+    {
+      "id": "beispiel-4",
+      "name": "Pantoprazol",
+      "strength": "40 mg",
+      "quantity": 5,
+      "asOf": 20770,
+      "daily": 1,
+      "pack": 98,
+      "warn": 10,
+      "status": "received",
+      "statusDay": 20769,
+      "codes": []
+    },
+    {
+      "id": "beispiel-5",
+      "name": "Vitamin D3",
+      "strength": "1000 I.E.",
+      "quantity": 45,
+      "asOf": 20770,
+      "daily": 0.5,
+      "pack": 90,
+      "warn": 21,
+      "status": "none",
+      "statusDay": null,
+      "codes": []
+    }
+  ]
+}

@@ -1,1 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#1f5c4a"/><g transform="rotate(-40 256 256)"><rect x="106" y="186" width="300" height="140" rx="70" fill="#fffdf8"/><path d="M256 186h80a70 70 0 0 1 0 140h-80z" fill="#e8a06a"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f7a63"/>
+      <stop offset="1" stop-color="#1f5c4a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- Rezeptblatt -->
+  <g transform="rotate(-7 236 236)">
+    <rect x="128" y="92" width="226" height="292" rx="30" fill="#174a3b" opacity=".35" transform="translate(6 10)"/>
+    <rect x="128" y="92" width="226" height="292" rx="30" fill="#fffdf8"/>
+    <rect x="164" y="134" width="96" height="26" rx="13" fill="#1f5c4a"/>
+    <rect x="164" y="192" width="154" height="16" rx="8" fill="#ddd6c6"/>
+    <rect x="164" y="230" width="154" height="16" rx="8" fill="#ddd6c6"/>
+    <rect x="164" y="268" width="100" height="16" rx="8" fill="#ddd6c6"/>
+  </g>
+  <!-- Kapsel -->
+  <g transform="translate(340 356) rotate(-38)">
+    <rect x="-118" y="-50" width="236" height="100" rx="50" fill="#1f5c4a"/>
+    <rect x="-106" y="-38" width="212" height="76" rx="38" fill="#fffdf8"/>
+    <path d="M0 -38h68a38 38 0 0 1 0 76h-68z" fill="#e8a06a"/>
+    <rect x="-82" y="-24" width="56" height="12" rx="6" fill="#fff" opacity=".9"/>
+  </g>
+</svg>
